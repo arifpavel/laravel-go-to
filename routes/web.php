@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'HomeController@getUsers')->name('users');
 
 Route::get('/hello', function () {
-    return "Hello World";
+    return view('admin.dashboard');
 });
 
 /**
@@ -28,3 +28,12 @@ Route::get('/hello', function () {
  */
 Route::get('login/{provider}', 'SocialLoginController@redirect');
 Route::get('login/{provider}/callback','SocialLoginController@Callback');
+
+/**
+ * Admin routes.
+ */
+Route::group(['namespace' => 'Admin','prefix' => 'admin', 'as' => 'admin', 'middleware' => ['web', 'auth:web']],
+    function(){
+        Route::get('roles', 'UserController@roles')->name('admin.roles');
+    }
+);
