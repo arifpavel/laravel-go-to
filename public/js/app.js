@@ -52595,9 +52595,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/arifpavel/workplace/laravel/ladium/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/arifpavel/workplace/laravel/ladium/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/arifpavel/workplace/laravel/ladium/resources/sass/admin/app.scss */"./resources/sass/admin/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ladium/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ladium/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ladium/resources/sass/admin/app.scss */"./resources/sass/admin/app.scss");
 
 
 /***/ })

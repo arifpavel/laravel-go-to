@@ -194,6 +194,29 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Logs Viewer
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('/admin/logs/dashboard'}}" class="nav-link">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>{{__('admin.logs-dashboard')}}</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/admin/logs')}}" class="nav-link">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>{{__('admin.logs')}}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           
         </ul>
       </nav>

@@ -35,5 +35,7 @@ Route::get('login/{provider}/callback','SocialLoginController@Callback');
 Route::group(['namespace' => 'Admin','prefix' => 'admin', 'as' => 'admin', 'middleware' => ['web', 'auth:web']],
     function(){
         Route::get('roles', 'UserController@roles')->name('admin.roles');
+        // Route::get('logs/dashboard', 'UserController@logsDashboard')->name('admin.logs.dashboard');
+        // Route::get('logs', 'UserController@logs')->name('admin.logs');
     }
 );
