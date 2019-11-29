@@ -7,6 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Skew Soft">
+  <meta name="base-url" content="{{ url('/') }}" />
   <link rel="icon" href="/img/favicon.ico">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,7 +25,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="{{url('/')}}" class="nav-link" target="_blank">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -130,10 +131,12 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+      <hr type="vertical"/>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-th-large"></i>
-        </a>
+        <form method="post" action="{{ url('/logout') }}">
+        @csrf
+        <input type="submit" class="btn btn-outline-danger btn-md" value="Sign Out">
+        </form>
       </li>
     </ul>
   </nav>
@@ -155,10 +158,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="admin/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="@if(auth()->user()->provider == null) {{url(auth()->user()->image)}} @else {{auth()->user()->image}} @endif" class="img-circle elevation-2" alt="{{auth()->user()->username}}">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="{{ url('/user/edit/'. auth()->user()->id)}}" class="d-block">{{auth()->user()->username}}</a>
         </div>
       </div>
 
@@ -166,7 +169,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+          <a href="{{url('admin')}}" class="nav-link">
                   <i class="fas fa-tachometer-alt nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
@@ -181,22 +184,28 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
+                <a href="{{url('admin/users/')}}" class="nav-link">
+                  <i class="fa fa-user-cog nav-icon"></i>
                   <p>Users</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{url('/admin/roles')}}" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
+                  <i class="fa fa-user-shield nav-icon"></i>
                   <p>{{__('admin.roles')}}</p>
                 </a>
               </li>
+              <li class="nav-item">
+                  <a href="{{url('/admin/permissions')}}" class="nav-link">
+                    <i class="fa fa-user-check nav-icon"></i>
+                    <p>{{__('admin.permissions')}}</p>
+                  </a>
+                </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fa fa-chart-bar"></i>
               <p>
                 Logs Viewer
                 <i class="right fas fa-angle-left"></i>
@@ -204,7 +213,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('/admin/logs/dashboard'}}" class="nav-link">
+                <a href="{{url('/admin/logs/dashboard')}}" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>{{__('admin.logs-dashboard')}}</p>
                 </a>
@@ -217,7 +226,12 @@
               </li>
             </ul>
           </li>
-          
+          <li class="nav-item">
+              <a href="{{url('/admin/settings')}}" class="nav-link">
+                <i class="fa fa-cogs nav-icon"></i>
+                <p>{{__('admin.settings')}}</p>
+              </a>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -249,6 +263,11 @@
 <!-- ./wrapper -->
 
 <!-- Scripts -->
-<script src="{{ asset('admin/js/app.js') }}" defer></script>
+<script src="{{ asset('admin/js/app.js') }}"></script>
+
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
+
+@stack('scripts')
 </body>
 </html>

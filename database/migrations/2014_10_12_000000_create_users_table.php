@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('bio')->nullable();
             $table->string('location')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/user/user.png');
             $table->string('cover_image')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();

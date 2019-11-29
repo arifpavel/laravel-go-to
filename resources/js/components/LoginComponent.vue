@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <button type="button" @click="showModal = true" class="dropdown-item btn btn-primary" data-toggle="modal">
-            Ladium Account
+            <a href="/login" >Ladium Account</a>
         </button>
         <!-- Login Vue Modal -->
         <div v-if="showModal" class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

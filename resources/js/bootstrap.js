@@ -18,6 +18,8 @@ try {
  */
 require('../../public/js/ie10-viewport-bug-workaround.js');
 require('../../public/js/ladium.js');
+//include sweet alert 2
+require('sweetalert');
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -27,6 +29,8 @@ require('../../public/js/ladium.js');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+//Set baseUrl from meta tag into window.baseurl object
+window.baseUrl = document.head.querySelector('meta[name="base-url"]').content;
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

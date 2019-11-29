@@ -6,7 +6,6 @@
 	<div class="mainheading">
 		<h1 class="sitetitle">Ladium</h1>
 		<p class="lead">
-             <example-component></example-component>
 			 <link-prevue url="http://unitedsettlement.com/" on-hover link-title="Facebook"></link-prevue>
 			 <link-prevue url="https://forge.medium.com/" on-hover link-title="Laravel"></link-prevue>
 		</p>

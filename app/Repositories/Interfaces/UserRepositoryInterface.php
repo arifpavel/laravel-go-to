@@ -8,5 +8,9 @@ interface UserRepositoryInterface
 
     public function getUserById($id);
 
-    public function getRole($id = null, $method = 'get');
+    public function getUserByName($username = null);
+
+    public function updateUser($id = null, $request = null);
+
+    public function delete($id = null);
 }

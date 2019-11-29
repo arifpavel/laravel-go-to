@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->extend('command.model.make', function ($command, $app) {
             return new ModelMake($app['files']);
         });
+        //$this->app->register(LadiumServiceProvider::class);
     }
 
     /**

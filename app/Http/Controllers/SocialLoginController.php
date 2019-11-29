@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Socialite;
 use Auth;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 
 
@@ -29,8 +30,11 @@ class SocialLoginController extends Controller
                                 'image'         => $userSocial->getAvatar(),
                                 'provider_id'   => $userSocial->getId(),
                                 'provider'      => $provider,
+                                'satus'      => 'active',
                             ]);
-                        return redirect()->route('home');
+                        //Attache default role to user.
+                        $user->assignRole('user');
+                        return redirect()->route('/');
                     }
         }
     

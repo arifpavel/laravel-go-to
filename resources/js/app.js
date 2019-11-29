@@ -25,6 +25,30 @@ Vue.component('login-component', require('./components/LoginComponent.vue').defa
 //import LinkPrevue from 'link-prevue';
 Vue.component('link-prevue', require('./components/Linkprevue.vue').default);
 
+// User components for frontend.
+Vue.component('edit-user', require('./components/user/EditComponent.vue').default);
+
+// Import vForm components for dynamic form creation with validation.
+import { Form, HasError, AlertError, AlertSuccess } from 'vform';
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+Vue.component(AlertSuccess.name, AlertSuccess);
+window.Form = Form;
+
+/**
+ * Sweet Alart 2 import & set to window for global use.
+ */
+import Swal from 'sweetalert2'
+const toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+  });
+window.Toast = toast;
+window.Swal = Swal;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -15,5 +15,7 @@ return [
 
     'manage-users' => 'Manage Users',
     'roles' => 'Roles',
+    'permissions' => 'Permissions',
+    'settings' => 'Settings',
 
 ];

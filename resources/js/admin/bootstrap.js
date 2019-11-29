@@ -17,6 +17,10 @@ try {
  * 
  */
 require('admin-lte/dist/js/adminlte.min.js');
+
+//include sweet alert 2
+require('sweetalert');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -26,6 +30,7 @@ require('admin-lte/dist/js/adminlte.min.js');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.baseUrl = document.head.querySelector('meta[name="base-url"]').content;
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

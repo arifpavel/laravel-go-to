@@ -8,6 +8,7 @@
     <link rel="icon" href="/img/favicon.ico">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url('/') }}">
 
     <title>{{ config('app.name', 'Ladium') }}</title>
 
@@ -43,9 +44,12 @@
                         <li class="nav-item">
                         <a class="nav-link" href="post.html">Post</a>
                         </li>
+                        @can('user edit')
+                            
                         <li class="nav-item">
                         <a class="nav-link" href="author.html">Author</a>
                         </li>
+                        @endcan
                     </ul>
                     <!-- End Menu -->
                     <!-- Begin Search -->
@@ -59,11 +63,11 @@
                         @if(Auth::user())
                             <li class="nav-item dropdown">
                               <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                                <img class="rounded-circle u-box-shadow-sm mr-2" width="35" height="35" src="https://htmlstream.com/preview/stream-ui-kit/assets/img-temp/ava/img3.jpg" alt="Htmlstream"> John Doe <i class="fa fa-angle-down small ml-1"></i>
+                              <img class="rounded-circle u-box-shadow-sm mr-2" width="35" height="35" src="@if(auth()->user()->provider == null) {{url(auth()->user()->image)}} @else {{auth()->user()->image}} @endif" alt="{{auth()->user()->username}}"> {{auth()->user()->username}} <i class="fa fa-angle-down small ml-1"></i>
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Account Settings</a>
+                              <a class="dropdown-item" href="{{url('/user/'. Auth::user()->username)}}">{{ __('user.profile')}}</a>
+                                <a class="dropdown-item" href="{{url('/user/edit/'. Auth::user()->id)}}">{{ __('user.setting')}}</a>
                                 <a class="dropdown-item" href="#">Newsletter</a>
                                 <div class="dropdown-divider"></div>
                                 <form method="post" action="{{ url('/logout') }}">
@@ -121,9 +125,12 @@
     <!-- End Modals -->
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- Include this after the sweet alert js file -->
+    @include('sweet::alert')
 
     <!-- Global Footer Sript -->
-    <script> @yield('footer-script') </script>
+    @stack('scripts')
 </body>
 </html>

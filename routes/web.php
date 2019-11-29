@@ -27,15 +27,28 @@ Route::get('/hello', function () {
  * Adding social login routes
  */
 Route::get('login/{provider}', 'SocialLoginController@redirect');
-Route::get('login/{provider}/callback','SocialLoginController@Callback');
+Route::get('login/{provider}/callback','SocialLoginController@Callback')->middleware('checkuserstatus');
 
 /**
  * Admin routes.
  */
-Route::group(['namespace' => 'Admin','prefix' => 'admin', 'as' => 'admin', 'middleware' => ['web', 'auth:web']],
+Route::group(['namespace' => 'Admin','prefix' => 'admin', 'as' => 'admin', 'middleware' => ['auth','web', 'auth:web', 'role:superadmin|admin|editor|manager|stuff']],
     function(){
-        Route::get('roles', 'UserController@roles')->name('admin.roles');
-        // Route::get('logs/dashboard', 'UserController@logsDashboard')->name('admin.logs.dashboard');
-        // Route::get('logs', 'UserController@logs')->name('admin.logs');
+        Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+
+        //users datatable routes.
+        Route::resource('users', 'UserController');
+        Route::get('users/block/{id}', 'UserController@blockUnblock');
+        Route::resource('roles', 'RoleController');
+        Route::resource('permissions', 'PermissionController');
+        Route::get('/settings', 'SettingsController@index')->name('admin.settings');
     }
 );
+
+/**
+ * User routes.
+ */
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/{username}', 'UserController@show')->name('user.show');
+    Route::get('/edit/{id}', 'UserController@edit')->name('user.edit')->middleware('auth');
+});
